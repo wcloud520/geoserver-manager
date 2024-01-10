@@ -96,6 +96,7 @@ public class HTTPUtils {
         HttpClient client = new HttpClient();
         HttpConnectionManager connectionManager = client.getHttpConnectionManager();
         try {
+            url=Util.URLEncoder(url);
             setAuth(client, url, username, pw);
             httpMethod = new GetMethod(url);
             connectionManager.getParams().setConnectionTimeout(5000);
@@ -231,6 +232,7 @@ public class HTTPUtils {
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, RequestEntity requestEntity, String username, String pw) {
+        url=Util.URLEncoder(url);
         return send(new PutMethod(url), url, requestEntity, username, pw);
     }
 
@@ -355,6 +357,7 @@ public class HTTPUtils {
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, RequestEntity requestEntity, String username, String pw) {
+        url=Util.URLEncoder(url);
         return send(new PostMethod(url), url, requestEntity, username, pw);
     }
 
@@ -420,6 +423,7 @@ public class HTTPUtils {
         HttpClient client = new HttpClient();
         HttpConnectionManager connectionManager = client.getHttpConnectionManager();
         try {
+            url=Util.URLEncoder(url);
             setAuth(client, url, user, pw);
             httpMethod = new DeleteMethod(url);
             connectionManager.getParams().setConnectionTimeout(5000);
@@ -504,6 +508,7 @@ public class HTTPUtils {
         HttpClient client = new HttpClient();
         HttpConnectionManager connectionManager = client.getHttpConnectionManager();
         try {
+            url=Util.URLEncoder(url);
             setAuth(client, url, username, pw);
             httpMethod = new GetMethod(url);
             connectionManager.getParams().setConnectionTimeout(2000);

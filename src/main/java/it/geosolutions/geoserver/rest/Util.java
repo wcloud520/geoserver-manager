@@ -26,11 +26,16 @@
 package it.geosolutions.geoserver.rest;
 
 import it.geosolutions.geoserver.rest.decoder.RESTStyle;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -117,5 +122,25 @@ public static final String QUIET_ON_NOT_FOUND_PARAM = "quietOnNotFound=";
                     .append('=').append(parameterValue.trim());
         }
         return result;
+    }
+
+    public static String URLEncoder(String url){
+        try {
+            Pattern p = Pattern.compile("[\u4e00-\u9fa5]+");
+
+            String _url = url.toString();
+            Matcher m = p.matcher(_url);
+            StringBuffer b = new StringBuffer();
+            while (m.find()) {
+
+                m.appendReplacement(b, URLEncoder.encode(m.group(0), "utf-8"));
+
+            }
+            m.appendTail(b);
+            return b.toString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return url;
+        }
     }
 }
